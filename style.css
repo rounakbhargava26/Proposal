@@ -1,0 +1,97 @@
+/* Reset + base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #ffe6eb, #f7b7c4, #e58ca3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a2c2a;
+}
+
+/* Main card */
+.container {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 60px 40px;
+  max-width: 750px;
+  width: 90%;
+  border-radius: 30px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  text-align: center;
+  animation: fadeIn 1.2s ease;
+}
+
+/* Headings */
+h1 {
+  font-size: 2.6rem;
+  margin-bottom: 20px;
+  color: #b8325c;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #7a2c45;
+  margin-bottom: 20px;
+}
+
+/* Paragraphs */
+p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  margin: 15px 0;
+  color: #5a2d3c;
+}
+
+/* Heart */
+.heart {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  animation: pulse 1.6s infinite;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  margin-top: 35px;
+  padding: 15px 40px;
+  background: linear-gradient(135deg, #ff5f8a, #ff8fa3);
+  color: white;
+  text-decoration: none;
+  border-radius: 40px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(255, 95, 138, 0.4);
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(255, 95, 138, 0.6);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}

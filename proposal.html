@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Question</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* NO button */
+    .no-button {
+      margin-left: 20px;
+      padding: 15px 30px;
+      border-radius: 40px;
+      font-size: 1.05rem;
+      border: none;
+      cursor: pointer;
+      background: #e0e0e0;
+      color: #444;
+      transition: all 0.3s ease;
+    }
+
+    /* Hearts layer */
+    #hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .heart-float {
+      position: absolute;
+      animation-name: heartConfetti;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+      pointer-events: none;
+    }
+
+    @keyframes heartConfetti {
+      from {
+        transform: translate(0, 0);
+        opacity: 1;
+      }
+      to {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+      }
+    }
+
+    /* Final screen wrapper */
+    .final-wrapper {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container" id="mainContent">
+  <h1>The Question</h1>
+
+  <p id="questionText" style="font-size:1.3rem; font-weight:bold;">
+    Will you be mine — today, tomorrow, and always?
+  </p>
+
+  <div style="margin-top:40px; position: relative;">
+    <button id="yesBtn" class="button" onclick="sayYes()">YES 💖</button>
+    <button id="noBtn" class="no-button" onclick="handleNo()">No 🙈</button>
+  </div>
+</div>
+
+<div id="hearts"></div>
+
+<script>
+  let scale = 1;
+  let noClicks = 0;
+
+  const messages = [
+    "Are you sure? 🥺",
+    "Wait… really? 😳",
+    "Think again 😌",
+    "You know you want to 💕",
+    "Don’t break my heart 💔",
+    "I practiced this speech 🙈",
+    "Okay now you’re teasing 😏",
+    "The universe says YES ✨",
+    "At this point, destiny disagrees 😌",
+    "Just click YES already 😆",
+    "Come on… make me the happiest 😍"
+  ];
+
+  function handleNo() {
+    noClicks++;
+
+    if (noClicks <= messages.length) {
+      document.getElementById("questionText").innerText =
+        messages[noClicks - 1];
+    }
+
+    scale += 0.25;
+    document.getElementById("yesBtn").style.transform =
+      `scale(${scale})`;
+
+    const noBtn = document.getElementById("noBtn");
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 120 - 60;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  }
+
+  function sayYes() {
+    document.body.innerHTML = `
+      <div class="final-wrapper">
+        <div class="container">
+          <h1>She Said YES 💍❤️</h1>
+          <p>
+            And just like that,<br>
+            this became my favorite moment ever.
+          </p>
+          <p>
+            Thank you for choosing me.<br>
+            I promise to choose you every single day.
+          </p>
+        </div>
+      </div>
+      <div id="hearts"></div>
+    `;
+
+    startHearts();
+  }
+
+  function startHearts() {
+    const heartsContainer = document.getElementById("hearts");
+    const heartTypes = ["❤️", "💖", "💕", "💘"];
+    const totalHearts = 140;
+    const effectDuration = 6000;
+
+    for (let i = 0; i < totalHearts; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart-float";
+      heart.innerHTML =
+        heartTypes[Math.floor(Math.random() * heartTypes.length)];
+
+      const startX = Math.random() * window.innerWidth;
+      const startY = Math.random() * window.innerHeight;
+
+      const moveX = (Math.random() - 0.5) * 400;
+      const moveY = -(Math.random() * 500 + 200);
+
+      const size = Math.random() * 1.2 + 0.8;
+      const duration = Math.random() * 2 + 3;
+
+      heart.style.left = startX + "px";
+      heart.style.top = startY + "px";
+      heart.style.fontSize = size + "rem";
+      heart.style.animationDuration = duration + "s";
+      heart.style.setProperty("--x", moveX + "px");
+      heart.style.setProperty("--y", moveY + "px");
+
+      heartsContainer.appendChild(heart);
+
+      setTimeout(() => heart.remove(), duration * 1000);
+    }
+
+    setTimeout(() => {
+      heartsContainer.innerHTML = "";
+    }, effectDuration);
+  }
+</script>
+
+</body>
+</html>
