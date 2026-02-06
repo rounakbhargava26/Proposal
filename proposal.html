@@ -111,29 +111,55 @@
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   }
 
-  function sayYes() {
-    document.body.innerHTML = `
-      <div class="final-wrapper">
-        <div class="container">
-          <h1>You Said YESSSSSSS ❤️</h1>
-          <p>
-            And just like that,<br>
-            this became my favorite moment ever.
-          </p>
-          <p>
-            Thank you for choosing me.<br>
-            I promise to choose you every single day.
-          </p>
-          <p>
-            And also Happy One Year Anniversary Love ❤️❤️❤️ 
-          </p>
-        </div>
-      </div>
-      <div id="hearts"></div>
-    `;
+function sayYes() {
 
-    startHearts();
+  let finalMessage = "";
+
+  if (noClicks === 0) {
+    // YES clicked instantly
+    finalMessage = `
+      <h1>You Said YES Instantly ❤️</h1>
+      <p>
+        You didn’t hesitate.<br>
+        Not even for a second.
+      </p>
+      <p>
+        That moment meant everything to me.<br>
+        Guess I already had your heart ❤️
+      </p>
+      <p>
+        And also Happy One Year Anniversary Love ❤️❤️❤️
+      </p>
+    `;
+  } else {
+    // Normal YES flow (unchanged)
+    finalMessage = `
+      <h1>You Said YESSSSSSS ❤️</h1>
+      <p>
+        And just like that,<br>
+        this became my favorite moment ever.
+      </p>
+      <p>
+        Thank you for choosing me.<br>
+        I promise to choose you every single day.
+      </p>
+      <p>
+        And also Happy One Year Anniversary Love ❤️❤️❤️
+      </p>
+    `;
   }
+
+  document.body.innerHTML = `
+    <div class="final-wrapper">
+      <div class="container">
+        ${finalMessage}
+      </div>
+    </div>
+    <div id="hearts"></div>
+  `;
+
+  startHearts();
+}
 
   function startHearts() {
     const heartsContainer = document.getElementById("hearts");
@@ -176,7 +202,3 @@
 
 </body>
 </html>
-
-
-
-
